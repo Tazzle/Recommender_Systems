@@ -20,11 +20,11 @@ user_item_rating_matrix = {
 #for each product in products
 #   (rating of user a for the current product - avg. rating of user a) * (rating of user b for the current product - avg. rating of user b)
 
-#denomenator:
+#denominator:
 #for each product in products
 #   sqrt((rating of user a for the current product - avg. rating of user a)**2) * sqrt((rating of user b for the current product - avg. rating of user b)**2)
 
-#result = numerator / denomenator
+#result = numerator / denominator
 #example in the book has result of 0.85 when running a similarity between Alice and User1
 
 #math functions
@@ -55,7 +55,7 @@ def sim(a, b):
     numerator = sum(testdict.values())
     print numerator
 
-    #denomenator - TODO
+    #denominator - TODO
     
 
 sim('Alice', 'User1')
