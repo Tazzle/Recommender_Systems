@@ -14,10 +14,8 @@ user_item_rating_matrix = {
 }
 
 
-
 def avg(l):
     return sum(l, 0.0) / len(l)
-
 
 
 def get_user_average(user_a, user_b):
@@ -31,7 +29,6 @@ def get_user_average(user_a, user_b):
     avg_b = avg([v for k,v in user_item_rating_matrix[user_b].iteritems() if k in user_item_rating_matrix[user_a]])
 
     return(avg_a, avg_b)
-
 
 
 #parameter a, and parameter b should be usernames
@@ -60,7 +57,7 @@ def sim(user_a, user_b):
     denominator = sqrt(result_user_a)*sqrt(result_user_b)
 
     #result - returns 0.85
-    print ("{0:.2f}".format(numerator / denominator))
+    return ("{0:.2f}".format(numerator / denominator))
 
 
 
