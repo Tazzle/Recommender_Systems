@@ -13,7 +13,6 @@ user_item_rating_matrix = {
     'User4':{'Item1':1, 'Item2':5, 'Item3':5, 'Item4':2,'Item5':1}
 }
 
-
 def avg(l):
     return sum(l, 0.0) / len(l)
 
@@ -45,7 +44,6 @@ def sim(user_a, user_b):
     multiplied_values = {k : (v - avg_rating_user_a) * (user_item_rating_matrix[user_b][k] - avg_rating_user_b) for k, v in user_item_rating_matrix[user_a].items() if k in user_item_rating_matrix[user_b]}
     numerator = sum(multiplied_values.values())
 
-
     #denominator
     val_minus_avg_squared_user_a = {k : ((v - avg_rating_user_a) **2) for k, v in user_item_rating_matrix[user_a].items() if k in user_item_rating_matrix[user_b]}
     val_minus_avg_squared_user_b = {k : ((v - avg_rating_user_b) **2) for k, v in user_item_rating_matrix[user_b].items() if k in user_item_rating_matrix[user_a]}
@@ -60,8 +58,21 @@ def sim(user_a, user_b):
     return ("{0:.2f}".format(numerator / denominator))
 
 
+#find the similarity between the interests of Alice, and User1, based on the items they have both rated
+sim('Alice', 'User4')
 
-sim('Alice', 'User1')
+#sim('Alice', 'User1'): 0.85
+#sim('Alice', 'User2'): 0.71 (bug - should be 0.70)
+#sim('Alice', 'User3'): 0.00
+#sim('Alice', 'User4'): -0.79
+
+#Pearson's Correlation Coefficient returns a number between -1 and 1
+#the closer the result is to 1, the higher the similarity between the two users
+#conversely, the closer the result is to -1, the lower the similarity between two users
+#in this case, Alice's two Nearest Neighbours are User1, and User2
+#Alice's tastes are dissimilar to User1, and User4
+
+
 
 
 

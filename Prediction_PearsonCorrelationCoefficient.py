@@ -9,30 +9,30 @@ user_item_rating_matrix = {
     'User4':{'Item1':1, 'Item2':5, 'Item3':5, 'Item4':2,'Item5':1}
 }
 
-#predict a rating for Item5 for Alice based on her 2 Nearest Neighbours (User1, and User2)
-def pred(user_a,user_b, user_c):
+def pred(user_a, user_b, user_c, item_to_predict):
 
     avg_rating_a = avg([v for k,v in user_item_rating_matrix[user_a].iteritems()])
     avg_rating_b = avg([v for k,v in user_item_rating_matrix[user_b].iteritems()])
     avg_rating_c = avg([v for k,v in user_item_rating_matrix[user_c].iteritems()])
 
-    matrix_minus_alice = {k : v for k,v in user_item_rating_matrix.iteritems() if k is not user_a}
-
+    #getting 0.71 for sim(a,c). This should be 0.70 according to the book. 
+    #other values are as expected
     similarity_a_b = float(sim(user_a, user_b))
-    similarity_a_c= float(sim(user_a, user_c))
+    similarity_a_c = float(sim(user_a, user_c))
 
-    #bug - getting 0.71 instead of 0.70 for sim(a,c)
+    numerator_a_b = (similarity_a_b) * (user_item_rating_matrix[user_b][item_to_predict] - avg_rating_b)
+    numerator_a_c = (similarity_a_c) * (user_item_rating_matrix[user_c][item_to_predict] - avg_rating_c)
 
-    numerator_a_b = sum([(similarity_a_b * (v - avg_rating_b)) for k,v in matrix_minus_alice[user_b].iteritems()])
-    numerator_a_c = sum([(similarity_a_c * (v - avg_rating_c)) for k,v in matrix_minus_alice[user_c].iteritems()])
+    numerator =  numerator_a_b + numerator_a_c
+    denominator = similarity_a_b + similarity_a_c
 
-    denominator_a_b = sum([similarity_a_b for x in matrix_minus_alice])
-    denominator_a_c = sum([similarity_a_c for x in matrix_minus_alice])
+    item_rating_prediction = avg_rating_a + (numerator / denominator) 
 
-    item_rating_prediction = avg_rating_a + ((numerator_a_b + numerator_a_c)/(denominator_a_b+denominator_a_c))
-
-    print item_rating_prediction
+    #result - returns 4.87
+    print "{0:.2f}".format(item_rating_prediction)
 
 
-pred('Alice', 'User1', 'User2')
+#predict a rating for Alice for Item5 based on the ratings of her two nearest neighbours (User1, and User2) for Item5
+#the nearest neighbours were identified using the Pearson Correlation Coefficient formula in PearsonCorrelationCoefficient.py
+pred('Alice', 'User1', 'User2', 'Item5')
 
