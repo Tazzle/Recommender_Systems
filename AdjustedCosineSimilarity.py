@@ -27,7 +27,7 @@ def adj_cosine_sim(item_a, item_b):
     denominator = euc_len_item_a * euc_len_item_b
     
     #0.80
-    print "{0:.2f}".format(numerator/denominator)
+    return numerator/denominator
 
 
 adj_cosine_sim('Item1', 'Item5')
