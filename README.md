@@ -17,6 +17,23 @@ Source: [http://www.recommenderbook.net/media/corrigenda.pdf]
 ---
 
 
-
 #####Prediction_PearsonCorrelationCoefficient.py:  
-Page 16, Formula 2.3, Predicting a user's rating for an item based on the ratings of the user's nearest neighbours for that item.
+Page 16, Formula 2.3, Predict a user's rating for an item based on the ratings of the user's nearest neighbours for that item.
+
+---
+
+#####CosineSimilarity.py:  
+Page 19, Formula 2.5, The Cosine Similarity Measure. Identify if one item is similar to another.
+
+
+---
+
+#####AdjustedCosineSimilarity.py:  
+Page 19, Formula 2.7, The Adjusted Cosine Similarity Measure. Takes the differences in average rating behaviour of the users into account, unlike the basic cosine similarity measure.
+
+
+---
+
+#####Prediction_AdjustedCosineSimilarity.py:
+Page 20, Formula 2.9, Predict a user's rating for an item based on the user's ratings for items that are similar to that item.
+
